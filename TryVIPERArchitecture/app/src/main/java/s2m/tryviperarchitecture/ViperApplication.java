@@ -1,6 +1,7 @@
 package s2m.tryviperarchitecture;
 
 import android.app.Application;
+import android.content.Context;
 
 import com.squareup.leakcanary.LeakCanary;
 
@@ -9,7 +10,21 @@ import com.squareup.leakcanary.LeakCanary;
  */
 public class ViperApplication extends Application
 {
-    @Override public void onCreate() {
+    private static ViperApplication instance;
+
+    public ViperApplication()
+    {
+        instance = this;
+    }
+
+    public static Context getContext()
+    {
+        return instance;
+    }
+
+    @Override
+    public void onCreate()
+    {
         super.onCreate();
         LeakCanary.install(this);
     }

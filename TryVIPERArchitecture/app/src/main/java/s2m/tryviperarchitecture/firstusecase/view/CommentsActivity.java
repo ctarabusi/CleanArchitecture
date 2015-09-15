@@ -10,18 +10,19 @@ import android.widget.Button;
 import android.widget.ListView;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import butterknife.OnItemClick;
 import s2m.tryviperarchitecture.R;
 
-public class FirstActivity extends AppCompatActivity implements View.OnClickListener
+public class CommentsActivity extends AppCompatActivity implements View.OnClickListener, CommentsViewInterface
 {
-    private FirstPresenter presenter;
+    private CommentsArrayAdapter adapter;
 
-    @Bind(R.id.createEntryButton)
-    Button createEntryButton;
+    private CommentsPresenter presenter;
 
     @Bind(R.id.mainListView)
     ListView mainListView;
@@ -33,12 +34,10 @@ public class FirstActivity extends AppCompatActivity implements View.OnClickList
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
 
-        createEntryButton.setOnClickListener(this);
-
-        FirstArrayAdapter adapter = new FirstArrayAdapter(this, new ArrayList<FirstItem>());
+        adapter = new CommentsArrayAdapter(this, new ArrayList<Comment>());
         mainListView.setAdapter(adapter);
 
-        presenter = new FirstPresenter(getApplicationContext(), adapter);
+        presenter = new CommentsPresenter(this);
     }
 
     @Override
@@ -81,17 +80,28 @@ public class FirstActivity extends AppCompatActivity implements View.OnClickList
         return super.onOptionsItemSelected(item);
     }
 
-    @Override
+
+    @OnClick(R.id.createEntryButton)
     public void onClick(View v)
     {
-        presenter.onCreateEntryButtonClicked();
+        presenter.createRequested();
     }
 
     @OnItemClick(R.id.mainListView)
     public void onItemClick(int position)
     {
-        Snackbar.make(mainListView, "Deleted Entry " + position + "!", Snackbar.LENGTH_SHORT).show();
-        presenter.onItemClicked(position);
+        Comment itemClicked = adapter.getItem(position);
+        presenter.deleteRequested(itemClicked);
     }
 
+    public void setComments(List<Comment> commentList)
+    {
+        adapter.clear();
+        adapter.addAll(commentList);
+    }
+
+    public void showDeletedCommentSnackbar(String snackBarContent)
+    {
+        Snackbar.make(mainListView, snackBarContent, Snackbar.LENGTH_SHORT).show();
+    }
 }

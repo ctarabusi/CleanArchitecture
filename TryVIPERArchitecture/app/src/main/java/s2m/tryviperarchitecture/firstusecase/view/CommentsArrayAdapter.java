@@ -14,9 +14,9 @@ import s2m.tryviperarchitecture.R;
 /**
  * Created by cta on 14/09/15.
  */
-public class FirstArrayAdapter extends ArrayAdapter<FirstItem>
+public class CommentsArrayAdapter extends ArrayAdapter<Comment>
 {
-    public FirstArrayAdapter(Context context, List<FirstItem> items)
+    public CommentsArrayAdapter(Context context, List<Comment> items)
     {
         super(context, 0, items);
     }
@@ -24,7 +24,7 @@ public class FirstArrayAdapter extends ArrayAdapter<FirstItem>
     @Override
     public View getView(int position, View convertView, ViewGroup parent)
     {
-        FirstItem firstItem = getItem(position);
+        Comment comment = getItem(position);
 
         if (convertView == null)
         {
@@ -35,8 +35,8 @@ public class FirstArrayAdapter extends ArrayAdapter<FirstItem>
         TextView commentIdTextView = (TextView) convertView.findViewById(R.id.commentId);
         TextView commentValueTextView = (TextView) convertView.findViewById(R.id.commentValue);
 
-        commentIdTextView.setText(String.valueOf(firstItem.getCommentId()));
-        commentValueTextView.setText(firstItem.getCommentValue());
+        commentIdTextView.setText(String.valueOf(comment.getCommentId()));
+        commentValueTextView.setText(comment.getCommentValue());
 
         return convertView;
     }

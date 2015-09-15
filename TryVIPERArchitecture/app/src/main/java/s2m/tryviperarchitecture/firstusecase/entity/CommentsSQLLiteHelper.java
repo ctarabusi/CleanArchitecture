@@ -8,7 +8,7 @@ import android.util.Log;
 /**
  * Created by cta on 15/09/15.
  */
-public class FirstSQLLiteHelper extends SQLiteOpenHelper
+public class CommentsSQLLiteHelper extends SQLiteOpenHelper
 {
     public static final String TABLE_COMMENTS = "comments";
     public static final String COLUMN_ID = "_id";
@@ -19,7 +19,7 @@ public class FirstSQLLiteHelper extends SQLiteOpenHelper
 
     private static final String DATABASE_CREATE = "create table " + TABLE_COMMENTS + "(" + COLUMN_ID + " integer primary key autoincrement, " + COLUMN_COMMENT + " text not null);";
 
-    public FirstSQLLiteHelper(Context context)
+    public CommentsSQLLiteHelper(Context context)
     {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
@@ -33,7 +33,7 @@ public class FirstSQLLiteHelper extends SQLiteOpenHelper
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion)
     {
-        Log.w(FirstSQLLiteHelper.class.getName(), "Upgrading database from version " + oldVersion + " to " + newVersion + ", which will destroy all old data");
+        Log.w(CommentsSQLLiteHelper.class.getName(), "Upgrading database from version " + oldVersion + " to " + newVersion + ", which will destroy all old data");
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_COMMENTS);
         onCreate(db);
     }

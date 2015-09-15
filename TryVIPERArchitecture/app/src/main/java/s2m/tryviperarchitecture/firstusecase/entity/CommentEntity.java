@@ -3,7 +3,7 @@ package s2m.tryviperarchitecture.firstusecase.entity;
 /**
  * Created by cta on 15/09/15.
  */
-public class DBFirstItem
+public class CommentEntity
 {
     private long id;
     private String comment;
