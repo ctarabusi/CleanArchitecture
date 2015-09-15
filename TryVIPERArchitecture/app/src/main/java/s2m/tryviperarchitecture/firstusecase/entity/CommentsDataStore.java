@@ -23,7 +23,7 @@ public class CommentsDataStore
 
     public CommentsDataStore()
     {
-        dbHelper = new CommentsSQLLiteHelper(ViperApplication.getContext());
+        dbHelper = CommentsSQLLiteHelper.getInstance(ViperApplication.getContext());
     }
 
     public void open() throws SQLException

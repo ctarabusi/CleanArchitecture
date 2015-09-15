@@ -10,6 +10,8 @@ import android.util.Log;
  */
 public class CommentsSQLLiteHelper extends SQLiteOpenHelper
 {
+    private static CommentsSQLLiteHelper sInstance;
+
     public static final String TABLE_COMMENTS = "comments";
     public static final String COLUMN_ID = "_id";
     public static final String COLUMN_COMMENT = "comment";
@@ -22,6 +24,15 @@ public class CommentsSQLLiteHelper extends SQLiteOpenHelper
     public CommentsSQLLiteHelper(Context context)
     {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
+    }
+
+    public static synchronized CommentsSQLLiteHelper getInstance(Context context)
+    {
+        if (sInstance == null)
+        {
+            sInstance = new CommentsSQLLiteHelper(context.getApplicationContext());
+        }
+        return sInstance;
     }
 
     @Override
