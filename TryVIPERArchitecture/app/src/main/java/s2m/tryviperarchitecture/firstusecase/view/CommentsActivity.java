@@ -6,9 +6,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ListView;
 
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,7 +23,7 @@ public class CommentsActivity extends AppCompatActivity implements View.OnClickL
 {
     private CommentsArrayAdapter adapter;
 
-    private CommentsPresenter presenter;
+    private CommentsViewEventListener eventListener;
 
     @Bind(R.id.mainListView)
     ListView mainListView;
@@ -36,21 +37,38 @@ public class CommentsActivity extends AppCompatActivity implements View.OnClickL
 
         adapter = new CommentsArrayAdapter(this, new ArrayList<Comment>());
         mainListView.setAdapter(adapter);
+        eventListener = (CommentsViewEventListener) objectForClassName("s2m.tryviperarchitecture.firstusecase.view.CommentsPresenter");
+        eventListener.setOutput(this);
+    }
 
-        presenter = new CommentsPresenter(this);
+    public Object objectForClassName(String presenterClassName)
+    {
+        Object presenter = null;
+        try
+        {
+            Class presenterClass = Class.forName(presenterClassName);
+            Constructor constructor = presenterClass.getConstructor();
+            presenter = constructor.newInstance();
+        }
+        catch (ClassNotFoundException | NoSuchMethodException | InvocationTargetException | InstantiationException | IllegalAccessException e)
+        {
+            e.printStackTrace();
+        }
+
+        return presenter;
     }
 
     @Override
     protected void onResume()
     {
         super.onResume();
-        presenter.onActivityResumed();
+        eventListener.viewVisible();
     }
 
     @Override
     protected void onPause()
     {
-        presenter.onActivityPaused();
+        eventListener.viewGone();
         super.onPause();
     }
 
@@ -84,14 +102,14 @@ public class CommentsActivity extends AppCompatActivity implements View.OnClickL
     @OnClick(R.id.createEntryButton)
     public void onClick(View v)
     {
-        presenter.createRequested();
+        eventListener.createRequested();
     }
 
     @OnItemClick(R.id.mainListView)
     public void onItemClick(int position)
     {
         Comment itemClicked = adapter.getItem(position);
-        presenter.deleteRequested(itemClicked);
+        eventListener.deleteRequested(itemClicked);
     }
 
     public void setComments(List<Comment> commentList)

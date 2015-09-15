@@ -11,23 +11,27 @@ import s2m.tryviperarchitecture.firstusecase.CommentsInteractor;
  */
 public class CommentsPresenter implements DataSourceListener, CommentsViewEventListener
 {
-    private CommentsViewInterface commentsViewInterface;
+    private CommentsViewInterface output;
 
     private CommentsInteractor interactor;
 
-    public CommentsPresenter(@NonNull final CommentsViewInterface commentsViewInterface)
+    public CommentsPresenter()
     {
-        this.commentsViewInterface = commentsViewInterface;
         interactor = new CommentsInteractor();
     }
 
-    public void onActivityResumed()
+    public void setOutput(@NonNull final CommentsViewInterface output)
+    {
+        this.output = output;
+    }
+
+    public void viewVisible()
     {
         interactor.openConnection();
         interactor.setDataSourceListener(this);
     }
 
-    public void onActivityPaused()
+    public void viewGone()
     {
         interactor.closeConnection();
         interactor.setDataSourceListener(null);
@@ -35,7 +39,7 @@ public class CommentsPresenter implements DataSourceListener, CommentsViewEventL
 
     public void dataChanged(final List<Comment> comments)
     {
-        commentsViewInterface.setComments(comments);
+        output.setComments(comments);
     }
 
     @Override
@@ -48,6 +52,7 @@ public class CommentsPresenter implements DataSourceListener, CommentsViewEventL
     public void deleteRequested(Comment commentToDelete)
     {
         interactor.deleteItem(commentToDelete);
-        commentsViewInterface.showDeletedCommentSnackbar("Deleted comment with id: " + commentToDelete.getCommentId());
+        output.showDeletedCommentSnackbar("Deleted comment with id: " + commentToDelete.getCommentId());
     }
+
 }
