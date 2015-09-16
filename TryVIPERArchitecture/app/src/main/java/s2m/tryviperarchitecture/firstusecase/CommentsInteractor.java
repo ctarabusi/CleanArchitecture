@@ -5,10 +5,15 @@ import android.util.Log;
 import java.util.ArrayList;
 import java.util.List;
 
+import rx.Observable;
+import rx.Observer;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.functions.Func1;
+import rx.schedulers.Schedulers;
 import s2m.tryviperarchitecture.firstusecase.entity.CommentEntity;
 import s2m.tryviperarchitecture.firstusecase.entity.CommentsDataStore;
-import s2m.tryviperarchitecture.firstusecase.view.DataSourceListener;
 import s2m.tryviperarchitecture.firstusecase.view.Comment;
+import s2m.tryviperarchitecture.firstusecase.view.DataSourceListener;
 
 /**
  * Created by cta on 14/09/15.
@@ -38,31 +43,100 @@ public class CommentsInteractor
 
     public void createDBEntry()
     {
-        CommentEntity commentEntity = commentsDataStore.createComment("Created at" + System.currentTimeMillis());
-        Log.i(TAG, " createDBEntry " + commentEntity.getId());
-        dataChanged();
+        String commentsValue = "Rx Created at" + System.currentTimeMillis();
+        Observable.just(commentsValue).map(new Func1<String, Object>()
+        {
+            @Override
+            public Object call(String s)
+            {
+                CommentEntity commentEntity = commentsDataStore.createComment(s);
+                Log.i(TAG, " createDBEntry " + commentEntity.getId());
+                return null;
+            }
+        }).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(new Observer<Object>()
+        {
+            @Override
+            public void onCompleted()
+            {
+                dataChanged();
+            }
+
+            @Override
+            public void onError(Throwable e)
+            {
+
+            }
+
+            @Override
+            public void onNext(Object o)
+            {
+
+            }
+        });
     }
 
     public void dataChanged()
     {
         if (dataSourceListener != null)
         {
-            // Convert from Entities POJOS to Presenter POJOS
-            List<Comment> commentList = new ArrayList<>();
-            for (CommentEntity commentEntity : commentsDataStore.getAllComments())
-            {
-                commentList.add(new Comment(commentEntity.getId(), commentEntity.getComment()));
-            }
-            dataSourceListener.dataChanged(commentList);
+            final List<Comment> commentList = new ArrayList<>();
+            Observable.from(commentsDataStore.getAllComments())
+                    .subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
+                    .subscribe(new Observer<CommentEntity>()
+                    {
+                        @Override
+                        public void onCompleted()
+                        {
+                            dataSourceListener.dataChanged(commentList);
+                        }
+
+                        @Override
+                        public void onError(Throwable e)
+                        {
+
+                        }
+
+                        @Override
+                        public void onNext(CommentEntity commentEntity)
+                        {
+                            commentList.add(new Comment(commentEntity.getId(), commentEntity.getComment()));
+                        }
+                    });
         }
     }
 
     public void deleteItem(Comment commentToDelete)
     {
-        CommentEntity commentEntityToDelete = new CommentEntity();
-        commentEntityToDelete.setId(commentToDelete.getCommentId());
-        commentsDataStore.deleteComment(commentEntityToDelete);
-        dataChanged();
+        Observable.just(commentToDelete.getCommentId()).map(new Func1<Long, Object>()
+        {
+            @Override
+            public Object call(Long commentId)
+            {
+                CommentEntity commentEntityToDelete = new CommentEntity();
+                commentEntityToDelete.setId(commentId);
+                commentsDataStore.deleteComment(commentEntityToDelete);
+                return null;
+            }
+        }).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(new Observer<Object>()
+        {
+            @Override
+            public void onCompleted()
+            {
+                dataChanged();
+            }
+
+            @Override
+            public void onError(Throwable e)
+            {
+
+            }
+
+            @Override
+            public void onNext(Object o)
+            {
+
+            }
+        });
     }
 
     public void setDataSourceListener(DataSourceListener dataSourceListener)
