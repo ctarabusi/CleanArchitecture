@@ -72,16 +72,15 @@ public class CommentsInteractor
     public void createDBEntry()
     {
         String commentsValue = "Rx Created at" + System.currentTimeMillis();
-        Observable.just(commentsValue).map(new Func1<String, Object>()
+        Observable.just(commentsValue).map(new Func1<String, CommentEntity>()
         {
             @Override
-            public Object call(String s)
+            public CommentEntity call(String s)
             {
                 CommentEntity commentEntity = commentsDataStore.createComment(s);
-                Log.i(TAG, " createDBEntry " + commentEntity.getId());
-                return null;
+                return commentEntity;
             }
-        }).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(new Observer<Object>()
+        }).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(new Observer<CommentEntity>()
         {
             @Override
             public void onCompleted()
@@ -92,13 +91,13 @@ public class CommentsInteractor
             @Override
             public void onError(Throwable e)
             {
-
+                Log.e(TAG, e.getMessage());
             }
 
             @Override
-            public void onNext(Object o)
+            public void onNext(CommentEntity createdCommentEntity)
             {
-
+                Log.i(TAG, " createDBEntry " + createdCommentEntity.getId());
             }
         });
     }
@@ -119,7 +118,7 @@ public class CommentsInteractor
                 @Override
                 public void onError(Throwable e)
                 {
-
+                    Log.e(TAG, e.getMessage());
                 }
 
                 @Override
@@ -154,7 +153,7 @@ public class CommentsInteractor
             @Override
             public void onError(Throwable e)
             {
-
+                Log.e(TAG, e.getMessage());
             }
 
             @Override
