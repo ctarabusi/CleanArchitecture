@@ -4,6 +4,8 @@ import android.support.annotation.NonNull;
 
 import java.util.List;
 
+import javax.inject.Inject;
+
 import s2m.tryviperarchitecture.firstusecase.CommentsInteractor;
 
 /**
@@ -15,9 +17,10 @@ public class CommentsPresenter implements DataSourceListener, CommentsViewEventL
 
     private CommentsInteractor interactor;
 
-    public CommentsPresenter()
+    @Inject
+    public CommentsPresenter(CommentsInteractor interactor)
     {
-        interactor = new CommentsInteractor();
+        this.interactor = interactor;
     }
 
     public void setOutput(@NonNull final CommentsViewInterface output)

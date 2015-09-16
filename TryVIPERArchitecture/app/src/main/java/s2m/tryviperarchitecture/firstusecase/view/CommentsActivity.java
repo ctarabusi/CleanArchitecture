@@ -18,6 +18,9 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.OnItemClick;
 import s2m.tryviperarchitecture.R;
+import s2m.tryviperarchitecture.firstusecase.module.CommentsPresenterComponent;
+import s2m.tryviperarchitecture.firstusecase.module.CommentsPresenterModule;
+import s2m.tryviperarchitecture.firstusecase.module.DaggerCommentsPresenterComponent;
 
 public class CommentsActivity extends AppCompatActivity implements View.OnClickListener, CommentsViewInterface
 {
@@ -37,7 +40,11 @@ public class CommentsActivity extends AppCompatActivity implements View.OnClickL
 
         adapter = new CommentsArrayAdapter(this, new ArrayList<Comment>());
         mainListView.setAdapter(adapter);
-        eventListener = (CommentsViewEventListener) objectForClassName("s2m.tryviperarchitecture.firstusecase.view.CommentsPresenter");
+
+        CommentsPresenterComponent component = DaggerCommentsPresenterComponent.create();
+        eventListener = component.provideCommentsPresenter();
+
+       // eventListener = (CommentsViewEventListener) objectForClassName("s2m.tryviperarchitecture.firstusecase.view.CommentsPresenter");
         eventListener.setOutput(this);
     }
 
