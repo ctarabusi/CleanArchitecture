@@ -5,7 +5,7 @@ import java.util.List;
 /**
  * Created by cta on 15/09/15.
  */
-public interface CommentsViewInterface
+public interface UpdateViewInterface
 {
      void setComments(List<Comment> commentList);
 

@@ -1,4 +1,4 @@
-package s2m.tryviperarchitecture.firstusecase.module;
+package s2m.tryviperarchitecture.firstusecase.di;
 
 import javax.inject.Singleton;
 

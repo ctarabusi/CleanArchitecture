@@ -1,10 +1,12 @@
-package s2m.tryviperarchitecture.firstusecase;
+package s2m.tryviperarchitecture.firstusecase.interactor;
 
 import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
+
+import javax.inject.Inject;
 
 import rx.Observable;
 import rx.Observer;
@@ -15,7 +17,6 @@ import rx.schedulers.Schedulers;
 import s2m.tryviperarchitecture.firstusecase.entity.CommentEntity;
 import s2m.tryviperarchitecture.firstusecase.entity.CommentsDataStore;
 import s2m.tryviperarchitecture.firstusecase.view.Comment;
-import s2m.tryviperarchitecture.firstusecase.view.DataSourceListener;
 
 /**
  * Created by cta on 14/09/15.
@@ -25,13 +26,15 @@ public class CommentsInteractor
     private static final String TAG = CommentsInteractor.class.getSimpleName();
 
     private DataSourceListener dataSourceListener;
+
     private CommentsDataStore commentsDataStore;
 
     private Subscription timerSubscription;
 
-    public CommentsInteractor()
+    @Inject
+    public CommentsInteractor(CommentsDataStore commentsDataStore)
     {
-        commentsDataStore = new CommentsDataStore();
+        this.commentsDataStore = commentsDataStore;
     }
 
     public void openConnection()
@@ -104,30 +107,30 @@ public class CommentsInteractor
 
     public void dataChanged()
     {
-        if (dataSourceListener != null)
+        final List<Comment> commentList = new ArrayList<>();
+        Observable.from(commentsDataStore.getAllComments()).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(new Observer<CommentEntity>()
         {
-            final List<Comment> commentList = new ArrayList<>();
-            Observable.from(commentsDataStore.getAllComments()).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(new Observer<CommentEntity>()
+            @Override
+            public void onCompleted()
             {
-                @Override
-                public void onCompleted()
+                if (dataSourceListener != null)
                 {
                     dataSourceListener.dataChanged(commentList);
                 }
+            }
 
-                @Override
-                public void onError(Throwable e)
-                {
-                    Log.e(TAG, e.getMessage());
-                }
+            @Override
+            public void onError(Throwable e)
+            {
+                Log.e(TAG, e.getMessage());
+            }
 
-                @Override
-                public void onNext(CommentEntity commentEntity)
-                {
-                    commentList.add(new Comment(commentEntity.getId(), commentEntity.getComment()));
-                }
-            });
-        }
+            @Override
+            public void onNext(CommentEntity commentEntity)
+            {
+                commentList.add(new Comment(commentEntity.getId(), commentEntity.getComment()));
+            }
+        });
     }
 
     public void deleteItem(Comment commentToDelete)
@@ -167,6 +170,5 @@ public class CommentsInteractor
     public void setDataSourceListener(DataSourceListener dataSourceListener)
     {
         this.dataSourceListener = dataSourceListener;
-        dataChanged();
     }
 }

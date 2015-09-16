@@ -6,14 +6,15 @@ import java.util.List;
 
 import javax.inject.Inject;
 
-import s2m.tryviperarchitecture.firstusecase.CommentsInteractor;
+import s2m.tryviperarchitecture.firstusecase.interactor.CommentsInteractor;
+import s2m.tryviperarchitecture.firstusecase.interactor.DataSourceListener;
 
 /**
  * Created by cta on 14/09/15.
  */
-public class CommentsPresenter implements DataSourceListener, CommentsViewEventListener
+public class CommentsPresenter implements DataSourceListener, ViewEventListener
 {
-    private CommentsViewInterface output;
+    private UpdateViewInterface output;
 
     private CommentsInteractor interactor;
 
@@ -23,7 +24,7 @@ public class CommentsPresenter implements DataSourceListener, CommentsViewEventL
         this.interactor = interactor;
     }
 
-    public void setOutput(@NonNull final CommentsViewInterface output)
+    public void setOutput(@NonNull final UpdateViewInterface output)
     {
         this.output = output;
     }

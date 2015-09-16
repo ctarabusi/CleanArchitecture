@@ -5,9 +5,9 @@ import android.support.annotation.NonNull;
 /**
  * Created by cta on 15/09/15.
  */
-public interface CommentsViewEventListener
+public interface ViewEventListener
 {
-    void setOutput(@NonNull final CommentsViewInterface output);
+    void setOutput(@NonNull final UpdateViewInterface output);
 
     void viewVisible();
 

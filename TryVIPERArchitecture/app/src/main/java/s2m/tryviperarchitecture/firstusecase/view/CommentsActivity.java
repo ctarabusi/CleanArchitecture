@@ -8,8 +8,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ListView;
 
-import java.lang.reflect.Constructor;
-import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,15 +16,14 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.OnItemClick;
 import s2m.tryviperarchitecture.R;
-import s2m.tryviperarchitecture.firstusecase.module.CommentsPresenterComponent;
-import s2m.tryviperarchitecture.firstusecase.module.CommentsPresenterModule;
-import s2m.tryviperarchitecture.firstusecase.module.DaggerCommentsPresenterComponent;
+import s2m.tryviperarchitecture.firstusecase.di.CommentsPresenterComponent;
+import s2m.tryviperarchitecture.firstusecase.di.DaggerCommentsPresenterComponent;
 
-public class CommentsActivity extends AppCompatActivity implements View.OnClickListener, CommentsViewInterface
+public class CommentsActivity extends AppCompatActivity implements View.OnClickListener, UpdateViewInterface
 {
     private CommentsArrayAdapter adapter;
 
-    private CommentsViewEventListener eventListener;
+    private ViewEventListener eventListener;
 
     @Bind(R.id.mainListView)
     ListView mainListView;
@@ -48,7 +45,7 @@ public class CommentsActivity extends AppCompatActivity implements View.OnClickL
         eventListener.setOutput(this);
     }
 
-    public Object objectForClassName(String presenterClassName)
+  /*  public Object objectForClassName(String presenterClassName)
     {
         Object presenter = null;
         try
@@ -63,7 +60,7 @@ public class CommentsActivity extends AppCompatActivity implements View.OnClickL
         }
 
         return presenter;
-    }
+    } */
 
     @Override
     protected void onResume()
