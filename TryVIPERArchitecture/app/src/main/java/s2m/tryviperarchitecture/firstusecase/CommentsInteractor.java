@@ -4,9 +4,11 @@ import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import rx.Observable;
 import rx.Observer;
+import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Func1;
 import rx.schedulers.Schedulers;
@@ -25,6 +27,8 @@ public class CommentsInteractor
     private DataSourceListener dataSourceListener;
     private CommentsDataStore commentsDataStore;
 
+    private Subscription timerSubscription;
+
     public CommentsInteractor()
     {
         commentsDataStore = new CommentsDataStore();
@@ -34,11 +38,35 @@ public class CommentsInteractor
     {
         commentsDataStore.open();
         dataChanged();
+
+        // While the connection is opened I want to log every 5 second something
+        timerSubscription = Observable.interval(2, TimeUnit.SECONDS).
+                subscribe(new Observer<Long>()
+                {
+                    @Override
+                    public void onCompleted()
+                    {
+
+                    }
+
+                    @Override
+                    public void onError(Throwable e)
+                    {
+
+                    }
+
+                    @Override
+                    public void onNext(Long aLong)
+                    {
+                        Log.i(TAG, "Connection is opened");
+                    }
+                });
     }
 
     public void closeConnection()
     {
         commentsDataStore.close();
+        timerSubscription.unsubscribe();
     }
 
     public void createDBEntry()
@@ -80,28 +108,26 @@ public class CommentsInteractor
         if (dataSourceListener != null)
         {
             final List<Comment> commentList = new ArrayList<>();
-            Observable.from(commentsDataStore.getAllComments())
-                    .subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
-                    .subscribe(new Observer<CommentEntity>()
-                    {
-                        @Override
-                        public void onCompleted()
-                        {
-                            dataSourceListener.dataChanged(commentList);
-                        }
+            Observable.from(commentsDataStore.getAllComments()).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(new Observer<CommentEntity>()
+            {
+                @Override
+                public void onCompleted()
+                {
+                    dataSourceListener.dataChanged(commentList);
+                }
 
-                        @Override
-                        public void onError(Throwable e)
-                        {
+                @Override
+                public void onError(Throwable e)
+                {
 
-                        }
+                }
 
-                        @Override
-                        public void onNext(CommentEntity commentEntity)
-                        {
-                            commentList.add(new Comment(commentEntity.getId(), commentEntity.getComment()));
-                        }
-                    });
+                @Override
+                public void onNext(CommentEntity commentEntity)
+                {
+                    commentList.add(new Comment(commentEntity.getId(), commentEntity.getComment()));
+                }
+            });
         }
     }
 
