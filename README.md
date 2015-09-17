@@ -29,6 +29,5 @@ Integrated some AppCompat elements:
 Still TODOs:
 - Improve Dagger usage (maybe injecting the activity context)
 - Integrating Espresso for UI Testing
-- General clean up
-- Using Recycler View
+- General clean up and adding Null NotNull annotations
 - TabLayout

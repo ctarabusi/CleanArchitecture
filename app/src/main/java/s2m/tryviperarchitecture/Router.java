@@ -13,6 +13,11 @@ import s2m.tryviperarchitecture.secondusecase.view.SecondUserCaseFragment;
  */
 public class Router
 {
+    public enum Navigations
+    {
+        COMMENTS, SECOND_USE_CASE
+    }
+
     private static Router instance = null;
 
     public static Router getInstance()
@@ -24,16 +29,16 @@ public class Router
         return instance;
     }
 
-    public void navigateFromDrawer(@NonNull MainActivity activity, @AnyRes int id)
+    public void navigateFromDrawer(@NonNull MainActivity activity, Router.Navigations navigation)
     {
         TitleFragment fragment;
-        if (id == R.id.navDrawerComments)
+        if (navigation == Navigations.COMMENTS)
         {
-             fragment = new CommentsFragment();
+            fragment = new CommentsFragment();
         }
         else
         {
-             fragment = new SecondUserCaseFragment();
+            fragment = new SecondUserCaseFragment();
         }
         replaceFragment(activity, fragment);
     }

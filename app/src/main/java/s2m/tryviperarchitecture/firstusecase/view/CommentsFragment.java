@@ -2,10 +2,11 @@ package s2m.tryviperarchitecture.firstusecase.view;
 
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ListView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,7 +14,6 @@ import java.util.List;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import butterknife.OnItemClick;
 import s2m.tryviperarchitecture.R;
 import s2m.tryviperarchitecture.TitleFragment;
 import s2m.tryviperarchitecture.firstusecase.di.CommentsPresenterComponent;
@@ -25,12 +25,12 @@ import s2m.tryviperarchitecture.firstusecase.interactor.Comment;
  */
 public class CommentsFragment extends TitleFragment implements View.OnClickListener, UpdateViewInterface
 {
-    private CommentsArrayAdapter adapter;
+    private CommentsAdapter adapter;
 
     private ViewEventListener eventListener;
 
     @Bind(R.id.mainListView)
-    ListView mainListView;
+    RecyclerView mainListView;
 
     @Override
     public String getTitle()
@@ -44,12 +44,13 @@ public class CommentsFragment extends TitleFragment implements View.OnClickListe
         View rootView = inflater.inflate(R.layout.fragment_comments, container, false);
         ButterKnife.bind(this, rootView);
 
-        adapter = new CommentsArrayAdapter(this.getActivity(), new ArrayList<Comment>());
-        mainListView.setAdapter(adapter);
-
         CommentsPresenterComponent component = DaggerCommentsPresenterComponent.create();
         eventListener = component.provideCommentsPresenter();
         eventListener.setOutput(this);
+
+        adapter = new CommentsAdapter(new ArrayList<Comment>(), eventListener);
+        mainListView.setAdapter(adapter);
+        mainListView.setLayoutManager(new LinearLayoutManager(this.getActivity()));
 
         return rootView;
     }
@@ -74,17 +75,9 @@ public class CommentsFragment extends TitleFragment implements View.OnClickListe
         eventListener.createRequested();
     }
 
-    @OnItemClick(R.id.mainListView)
-    public void onItemClick(int position)
-    {
-        Comment itemClicked = adapter.getItem(position);
-        eventListener.deleteRequested(itemClicked);
-    }
-
     public void setComments(List<Comment> commentList)
     {
-        adapter.clear();
-        adapter.addAll(commentList);
+        adapter.setData(commentList);
     }
 
     public void showDeletedCommentSnackbar(String snackBarContent)

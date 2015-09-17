@@ -14,7 +14,6 @@ import butterknife.ButterKnife;
 
 public class MainActivity extends ActionBarActivity
 {
-
     @Bind(R.id.drawer_layout)
     DrawerLayout mDrawerLayout;
 
@@ -52,6 +51,8 @@ public class MainActivity extends ActionBarActivity
                 return true;
             }
         });
+
+        navigateTo(Router.Navigations.COMMENTS);
     }
 
     @Override
@@ -79,9 +80,21 @@ public class MainActivity extends ActionBarActivity
         return super.onOptionsItemSelected(item);
     }
 
-    public void navigateTo(int resId)
+    public void navigateTo(Router.Navigations navigation)
     {
-        Router.getInstance().navigateFromDrawer(this, resId);
+        Router.getInstance().navigateFromDrawer(this, navigation);
+    }
+
+    public void navigateTo(int menuId)
+    {
+        if (menuId == R.id.navDrawerComments)
+        {
+            navigateTo(Router.Navigations.COMMENTS);
+        }
+        else if (menuId == R.id.navDrawerSecondUseCase)
+        {
+            navigateTo(Router.Navigations.SECOND_USE_CASE);
+        }
     }
 
     public void closeDrawer()

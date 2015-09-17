@@ -6,13 +6,13 @@
         <item
             android:id="@+id/navDrawerComments"
             android:checked="false"
-            android:icon="@android:drawable/ic_menu_directions"
+            android:icon="@drawable/ic_group_add_black_48dp"
             android:title="@string/navigation_comments"/>
 
         <item
             android:id="@+id/navDrawerSecondUseCase"
             android:checked="false"
-            android:icon="@android:drawable/ic_menu_day"
+            android:icon="@drawable/ic_mood_black_48dp"
             android:title="@string/navigation_secondusecase"/>
 
     </group>
