@@ -4,6 +4,7 @@ import javax.inject.Singleton;
 
 import dagger.Module;
 import dagger.Provides;
+import s2m.tryviperarchitecture.thirdusecase.interactor.RecordInteractor;
 import s2m.tryviperarchitecture.thirdusecase.view.RecordPresenter;
 
 @Module
@@ -11,8 +12,15 @@ public class RecordPresenterModule
 {
     @Provides
     @Singleton
-    RecordPresenter provideRecordPresenter()
+    RecordInteractor provideRecordInteractor()
     {
-        return new RecordPresenter();
+        return new RecordInteractor();
+    }
+
+    @Provides
+    @Singleton
+    RecordPresenter provideRecordPresenter(RecordInteractor interactor)
+    {
+        return new RecordPresenter(interactor);
     }
 }
