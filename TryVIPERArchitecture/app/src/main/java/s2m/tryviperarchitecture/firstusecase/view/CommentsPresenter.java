@@ -7,8 +7,8 @@ import java.util.List;
 import javax.inject.Inject;
 
 import s2m.tryviperarchitecture.firstusecase.interactor.Comment;
+import s2m.tryviperarchitecture.firstusecase.interactor.CommentsInteractor;
 import s2m.tryviperarchitecture.firstusecase.interactor.DataChangeListener;
-import s2m.tryviperarchitecture.firstusecase.interactor.Interactor;
 
 /**
  * Created by cta on 14/09/15.
@@ -17,10 +17,10 @@ public class CommentsPresenter implements DataChangeListener, ViewEventListener
 {
     private UpdateViewInterface output;
 
-    private Interactor interactor;
+    private CommentsInteractor interactor;
 
     @Inject
-    public CommentsPresenter(Interactor interactor)
+    public CommentsPresenter(CommentsInteractor interactor)
     {
         this.interactor = interactor;
     }

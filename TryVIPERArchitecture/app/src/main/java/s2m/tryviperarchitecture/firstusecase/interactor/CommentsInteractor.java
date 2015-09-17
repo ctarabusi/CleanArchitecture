@@ -20,7 +20,7 @@ import s2m.tryviperarchitecture.firstusecase.entity.CommentsDataStore;
 /**
  * Created by cta on 14/09/15.
  */
-public class CommentsInteractor implements Interactor
+public class CommentsInteractor
 {
     private static final String TAG = CommentsInteractor.class.getSimpleName();
 
@@ -36,7 +36,6 @@ public class CommentsInteractor implements Interactor
         this.commentsDataStore = commentsDataStore;
     }
 
-    @Override
     public void openConnection()
     {
         commentsDataStore.open();
@@ -66,14 +65,12 @@ public class CommentsInteractor implements Interactor
                 });
     }
 
-    @Override
     public void closeConnection()
     {
         commentsDataStore.close();
         timerSubscription.unsubscribe();
     }
 
-    @Override
     public void createDBEntry()
     {
         String commentsValue = "Rx Created at" + System.currentTimeMillis();
@@ -134,7 +131,6 @@ public class CommentsInteractor implements Interactor
         });
     }
 
-    @Override
     public void deleteItem(Comment commentToDelete)
     {
         Observable.just(commentToDelete.getCommentId()).map(new Func1<Long, Object>()
@@ -169,7 +165,6 @@ public class CommentsInteractor implements Interactor
         });
     }
 
-    @Override
     public void setOutput(DataChangeListener dataChangeListener)
     {
         this.dataChangeListener = dataChangeListener;
