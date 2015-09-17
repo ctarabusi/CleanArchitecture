@@ -7,7 +7,7 @@
     <string name="secondusecase_title">Dummy Title</string>
 
     <string name="navigation_comments">Comments</string>
-    <string name="navigation_tablayout">Second Use Case</string>
+    <string name="navigation_tablayout">Tab Layout</string>
     <string name="navigation_record">Record</string>
 
 </resources>

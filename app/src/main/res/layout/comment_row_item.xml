@@ -24,6 +24,7 @@
         android:id="@+id/commentRemove"
         android:layout_width="20dp"
         android:layout_height="wrap_content"
+        android:padding="10dp"
         android:src="@drawable/ic_delete_black_36dp"
         android:layout_alignParentRight="true"
         android:layout_centerInParent="true"/>
