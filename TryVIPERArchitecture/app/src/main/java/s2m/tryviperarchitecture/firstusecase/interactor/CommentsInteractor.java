@@ -16,16 +16,15 @@ import rx.functions.Func1;
 import rx.schedulers.Schedulers;
 import s2m.tryviperarchitecture.firstusecase.entity.CommentEntity;
 import s2m.tryviperarchitecture.firstusecase.entity.CommentsDataStore;
-import s2m.tryviperarchitecture.firstusecase.view.Comment;
 
 /**
  * Created by cta on 14/09/15.
  */
-public class CommentsInteractor
+public class CommentsInteractor implements Interactor
 {
     private static final String TAG = CommentsInteractor.class.getSimpleName();
 
-    private DataSourceListener dataSourceListener;
+    private DataChangeListener dataChangeListener;
 
     private CommentsDataStore commentsDataStore;
 
@@ -37,6 +36,7 @@ public class CommentsInteractor
         this.commentsDataStore = commentsDataStore;
     }
 
+    @Override
     public void openConnection()
     {
         commentsDataStore.open();
@@ -66,12 +66,14 @@ public class CommentsInteractor
                 });
     }
 
+    @Override
     public void closeConnection()
     {
         commentsDataStore.close();
         timerSubscription.unsubscribe();
     }
 
+    @Override
     public void createDBEntry()
     {
         String commentsValue = "Rx Created at" + System.currentTimeMillis();
@@ -80,8 +82,7 @@ public class CommentsInteractor
             @Override
             public CommentEntity call(String s)
             {
-                CommentEntity commentEntity = commentsDataStore.createComment(s);
-                return commentEntity;
+                return commentsDataStore.createComment(s);
             }
         }).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(new Observer<CommentEntity>()
         {
@@ -113,9 +114,9 @@ public class CommentsInteractor
             @Override
             public void onCompleted()
             {
-                if (dataSourceListener != null)
+                if (dataChangeListener != null)
                 {
-                    dataSourceListener.dataChanged(commentList);
+                    dataChangeListener.dataChanged(commentList);
                 }
             }
 
@@ -133,6 +134,7 @@ public class CommentsInteractor
         });
     }
 
+    @Override
     public void deleteItem(Comment commentToDelete)
     {
         Observable.just(commentToDelete.getCommentId()).map(new Func1<Long, Object>()
@@ -167,8 +169,9 @@ public class CommentsInteractor
         });
     }
 
-    public void setDataSourceListener(DataSourceListener dataSourceListener)
+    @Override
+    public void setOutput(DataChangeListener dataChangeListener)
     {
-        this.dataSourceListener = dataSourceListener;
+        this.dataChangeListener = dataChangeListener;
     }
 }

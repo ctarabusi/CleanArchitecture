@@ -6,20 +6,21 @@ import java.util.List;
 
 import javax.inject.Inject;
 
-import s2m.tryviperarchitecture.firstusecase.interactor.CommentsInteractor;
-import s2m.tryviperarchitecture.firstusecase.interactor.DataSourceListener;
+import s2m.tryviperarchitecture.firstusecase.interactor.Comment;
+import s2m.tryviperarchitecture.firstusecase.interactor.DataChangeListener;
+import s2m.tryviperarchitecture.firstusecase.interactor.Interactor;
 
 /**
  * Created by cta on 14/09/15.
  */
-public class CommentsPresenter implements DataSourceListener, ViewEventListener
+public class CommentsPresenter implements DataChangeListener, ViewEventListener
 {
     private UpdateViewInterface output;
 
-    private CommentsInteractor interactor;
+    private Interactor interactor;
 
     @Inject
-    public CommentsPresenter(CommentsInteractor interactor)
+    public CommentsPresenter(Interactor interactor)
     {
         this.interactor = interactor;
     }
@@ -32,13 +33,13 @@ public class CommentsPresenter implements DataSourceListener, ViewEventListener
     public void viewVisible()
     {
         interactor.openConnection();
-        interactor.setDataSourceListener(this);
+        interactor.setOutput(this);
     }
 
     public void viewGone()
     {
         interactor.closeConnection();
-        interactor.setDataSourceListener(null);
+        interactor.setOutput(null);
     }
 
     public void dataChanged(final List<Comment> comments)

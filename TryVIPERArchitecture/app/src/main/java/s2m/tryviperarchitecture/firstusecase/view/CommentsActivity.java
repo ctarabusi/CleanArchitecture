@@ -18,6 +18,7 @@ import butterknife.OnItemClick;
 import s2m.tryviperarchitecture.R;
 import s2m.tryviperarchitecture.firstusecase.di.CommentsPresenterComponent;
 import s2m.tryviperarchitecture.firstusecase.di.DaggerCommentsPresenterComponent;
+import s2m.tryviperarchitecture.firstusecase.interactor.Comment;
 
 public class CommentsActivity extends AppCompatActivity implements View.OnClickListener, UpdateViewInterface
 {
@@ -40,9 +41,9 @@ public class CommentsActivity extends AppCompatActivity implements View.OnClickL
 
         CommentsPresenterComponent component = DaggerCommentsPresenterComponent.create();
         eventListener = component.provideCommentsPresenter();
-
-       // eventListener = (CommentsViewEventListener) objectForClassName("s2m.tryviperarchitecture.firstusecase.view.CommentsPresenter");
         eventListener.setOutput(this);
+
+        // eventListener = (CommentsViewEventListener) objectForClassName("s2m.tryviperarchitecture.firstusecase.view.CommentsPresenter");
     }
 
   /*  public Object objectForClassName(String presenterClassName)

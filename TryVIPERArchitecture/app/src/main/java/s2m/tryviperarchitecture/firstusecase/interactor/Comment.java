@@ -1,4 +1,4 @@
-package s2m.tryviperarchitecture.firstusecase.view;
+package s2m.tryviperarchitecture.firstusecase.interactor;
 
 /**
  * Created by cta on 14/09/15.

@@ -2,6 +2,8 @@ package s2m.tryviperarchitecture.firstusecase.view;
 
 import android.support.annotation.NonNull;
 
+import s2m.tryviperarchitecture.firstusecase.interactor.Comment;
+
 /**
  * Created by cta on 15/09/15.
  */

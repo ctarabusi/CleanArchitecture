@@ -11,7 +11,7 @@ import static org.mockito.Mockito.verify;
 /**
  * Created by cta on 16/09/15.
  */
-public class PresenterTest
+public class CommentsPresenterTest
 {
     @Test
     public void testPresenterOnCreate()

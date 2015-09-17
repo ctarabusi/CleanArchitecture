@@ -10,6 +10,7 @@ import android.widget.TextView;
 import java.util.List;
 
 import s2m.tryviperarchitecture.R;
+import s2m.tryviperarchitecture.firstusecase.interactor.Comment;
 
 /**
  * Created by cta on 14/09/15.
