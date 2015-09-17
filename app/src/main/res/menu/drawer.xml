@@ -7,13 +7,13 @@
             android:id="@+id/navDrawerComments"
             android:checked="false"
             android:icon="@android:drawable/ic_menu_directions"
-            android:text="@string/navigation_comments"/>
+            android:title="@string/navigation_comments"/>
 
         <item
             android:id="@+id/navDrawerSecondUseCase"
             android:checked="false"
             android:icon="@android:drawable/ic_menu_day"
-            android:text="@string/navigation_secondusecase"/>
+            android:title="@string/navigation_secondusecase"/>
 
     </group>
 </menu>
