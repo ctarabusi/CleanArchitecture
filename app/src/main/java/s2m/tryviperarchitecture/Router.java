@@ -1,21 +1,21 @@
 package s2m.tryviperarchitecture;
 
-import android.support.annotation.AnyRes;
 import android.support.annotation.NonNull;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 
 import s2m.tryviperarchitecture.firstusecase.view.CommentsFragment;
-import s2m.tryviperarchitecture.secondusecase.view.SecondUserCaseFragment;
+import s2m.tryviperarchitecture.secondusecase.view.TabLayoutFragment;
+import s2m.tryviperarchitecture.thirdusecase.view.RecordFragment;
 
 /**
  * Created by cta on 17/09/15.
  */
 public class Router
 {
-    public enum Navigations
+    public enum NavigationPaths
     {
-        COMMENTS, SECOND_USE_CASE
+        COMMENTS, TAB_LAYOUT, RECORD
     }
 
     private static Router instance = null;
@@ -29,16 +29,23 @@ public class Router
         return instance;
     }
 
-    public void navigateFromDrawer(@NonNull MainActivity activity, Router.Navigations navigation)
+    public void navigateFromDrawer(@NonNull MainActivity activity, NavigationPaths navigation)
     {
         TitleFragment fragment;
-        if (navigation == Navigations.COMMENTS)
+        switch (navigation)
         {
-            fragment = new CommentsFragment();
-        }
-        else
-        {
-            fragment = new SecondUserCaseFragment();
+            case COMMENTS:
+                fragment = new CommentsFragment();
+                break;
+
+            case TAB_LAYOUT:
+                fragment = new TabLayoutFragment();
+                break;
+
+            default:
+                fragment = new RecordFragment();
+                break;
+
         }
         replaceFragment(activity, fragment);
     }

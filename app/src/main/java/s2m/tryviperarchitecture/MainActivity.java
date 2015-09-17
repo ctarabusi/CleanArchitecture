@@ -54,7 +54,7 @@ public class MainActivity extends ActionBarActivity
 
         if (savedInstanceState == null)
         {
-            navigateTo(Router.Navigations.COMMENTS);
+            navigateTo(Router.NavigationPaths.COMMENTS);
         }
     }
 
@@ -83,7 +83,7 @@ public class MainActivity extends ActionBarActivity
         return super.onOptionsItemSelected(item);
     }
 
-    public void navigateTo(Router.Navigations navigation)
+    public void navigateTo(Router.NavigationPaths navigation)
     {
         Router.getInstance().navigateFromDrawer(this, navigation);
     }
@@ -92,11 +92,15 @@ public class MainActivity extends ActionBarActivity
     {
         if (menuId == R.id.navDrawerComments)
         {
-            navigateTo(Router.Navigations.COMMENTS);
+            navigateTo(Router.NavigationPaths.COMMENTS);
         }
-        else if (menuId == R.id.navDrawerSecondUseCase)
+        else if (menuId == R.id.navDrawerTabLayout)
         {
-            navigateTo(Router.Navigations.SECOND_USE_CASE);
+            navigateTo(Router.NavigationPaths.TAB_LAYOUT);
+        }
+        else if (menuId == R.id.navDrawerRecord)
+        {
+            navigateTo(Router.NavigationPaths.RECORD);
         }
     }
 

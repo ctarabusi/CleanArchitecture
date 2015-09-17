@@ -10,10 +10,16 @@
             android:title="@string/navigation_comments"/>
 
         <item
-            android:id="@+id/navDrawerSecondUseCase"
+            android:id="@+id/navDrawerTabLayout"
             android:checked="false"
             android:icon="@drawable/ic_mood_black_48dp"
-            android:title="@string/navigation_secondusecase"/>
+            android:title="@string/navigation_tablayout"/>
+
+        <item
+            android:id="@+id/navDrawerRecord"
+            android:checked="false"
+            android:icon="@drawable/ic_headset_mic_black_48dp"
+            android:title="@string/navigation_record"/>
 
     </group>
 </menu>

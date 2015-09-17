@@ -19,7 +19,7 @@ import s2m.tryviperarchitecture.TitleFragment;
 /**
  * Created by cta on 17/09/15.
  */
-public class SecondUserCaseFragment extends TitleFragment
+public class TabLayoutFragment extends TitleFragment
 {
     private static final int NUM_PAGES = 3;
 
@@ -38,7 +38,7 @@ public class SecondUserCaseFragment extends TitleFragment
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
-        View rootView = inflater.inflate(R.layout.fragment_secondusecase, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_tablayout, container, false);
         ButterKnife.bind(this, rootView);
 
         tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
