@@ -2,7 +2,7 @@
 
 This project tries to loosely follow the VIPER architecture (See https://www.objc.io/issues/13-architecture/viper/) but trying to find a balance between flexibility and overhead.
 
-It is primarly intended as a blue print for future projects defining a set of useful libraries and frameworks.
+It is primarly intended as a blue print for future projects defining a set of useful libraries and frameworks in the context of loosely coupled architecture composed of different layers.
 
 Here is a list of libraries/frameworks I integrated:
 
@@ -22,6 +22,4 @@ Everything is still work in progress.
 
 Still TODOs:
 - Improve Dagger usage (maybe injecting the activity context)
-- Add a Router (R of VIPER) and having at least an other activity
-- Using Fragments and having the router handle that as well
 - Integrating Espresso for UI Testing

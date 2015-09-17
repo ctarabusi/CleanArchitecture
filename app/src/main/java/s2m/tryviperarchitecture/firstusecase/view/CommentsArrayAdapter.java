@@ -29,7 +29,7 @@ public class CommentsArrayAdapter extends ArrayAdapter<Comment>
 
         if (convertView == null)
         {
-            convertView = LayoutInflater.from(getContext()).inflate(R.layout.main_row_item, parent, false);
+            convertView = LayoutInflater.from(getContext()).inflate(R.layout.comment_row_item, parent, false);
         }
 
         // TODO not yet a view holder here
