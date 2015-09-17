@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+          android:layout_width="match_parent"
+          android:layout_height="match_parent"
+          android:layout_gravity="center_horizontal"
+          android:padding="20dp"
+          android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque eget dui scelerisque, lacinia turpis at, pulvinar sem. Integer eget efficitur urna, ultrices volutpat ex. Donec ac nunc diam. Aenean efficitur dui ex, quis ornare justo porttitor vitae. Donec eu ligula nec sapien ullamcorper scelerisque sed nec leo. Nulla nisl eros, scelerisque eget lorem vel, interdum imperdiet sapien. Vivamus turpis eros, dictum vel iaculis ut, eleifend a metus. Interdum et malesuada fames ac ante ipsum primis in faucibus. Sed interdum libero eu maximus laoreet. Integer id velit sagittis, imperdiet lorem sed, tincidunt nunc. Nam facilisis nulla non nibh commodo, id elementum ligula molestie. Maecenas venenatis quam nulla, tristique facilisis eros ullamcorper aliquam. Proin vitae lacus ipsum. Nunc laoreet posuere bibendum. Phasellus purus dui, posuere finibus mattis at, molestie sed neque."
+          android:textAppearance="?android:attr/textAppearanceMedium"/>

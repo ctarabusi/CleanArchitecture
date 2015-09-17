@@ -31,4 +31,3 @@ Still TODOs:
 - Improve Dagger usage (maybe injecting the activity context)
 - Integrating Espresso for UI Testing
 - General clean up and adding Null NotNull annotations
-- TabLayout

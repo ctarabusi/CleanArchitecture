@@ -52,7 +52,10 @@ public class MainActivity extends ActionBarActivity
             }
         });
 
-        navigateTo(Router.Navigations.COMMENTS);
+        if (savedInstanceState == null)
+        {
+            navigateTo(Router.Navigations.COMMENTS);
+        }
     }
 
     @Override
