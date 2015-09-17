@@ -1,9 +1,9 @@
 package s2m.tryviperarchitecture;
 
-import android.app.FragmentManager;
-import android.app.FragmentTransaction;
 import android.support.annotation.AnyRes;
 import android.support.annotation.NonNull;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 
 import s2m.tryviperarchitecture.firstusecase.view.CommentsFragment;
 import s2m.tryviperarchitecture.secondusecase.view.SecondUserCaseFragment;
@@ -40,7 +40,7 @@ public class Router
 
     private void replaceFragment(@NonNull MainActivity activity, @NonNull TitleFragment fragment)
     {
-        FragmentManager fragmentManager = activity.getFragmentManager();
+        FragmentManager fragmentManager = activity.getSupportFragmentManager();
         FragmentTransaction ft = fragmentManager.beginTransaction();
         ft.replace(R.id.content_frame, fragment);
         ft.commit();

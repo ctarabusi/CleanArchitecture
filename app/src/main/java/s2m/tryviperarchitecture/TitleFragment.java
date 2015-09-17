@@ -1,6 +1,6 @@
 package s2m.tryviperarchitecture;
 
-import android.app.Fragment;
+import android.support.v4.app.Fragment;
 
 /**
  * Created by cta on 17/09/15.
