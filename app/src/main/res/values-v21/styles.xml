@@ -2,6 +2,9 @@
 
     <!-- your theme inherits from the material theme -->
     <style name="AppTheme" parent="android:Theme.Material">
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowActionBar">false</item>
+
         <item name="android:colorPrimary">#607D8B</item>
         <item name="android:colorPrimaryDark">#455A64</item>
         <item name="android:colorAccent">#FFEB3B</item>
