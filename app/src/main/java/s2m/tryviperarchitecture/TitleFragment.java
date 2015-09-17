@@ -1,5 +1,6 @@
 package s2m.tryviperarchitecture;
 
+import android.support.annotation.StringRes;
 import android.support.v4.app.Fragment;
 
 /**
@@ -7,5 +8,6 @@ import android.support.v4.app.Fragment;
  */
 public abstract class TitleFragment extends Fragment
 {
-    public abstract String getTitle();
+    @StringRes
+    public abstract int getTitle();
 }

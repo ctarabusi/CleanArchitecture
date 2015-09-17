@@ -4,8 +4,6 @@
     <string name="action_settings">Settings</string>
     <string name="action_map">Map</string>
 
-    <string name="secondusecase_title">Dummy Title</string>
-
     <string name="navigation_comments">Comments</string>
     <string name="navigation_tablayout">Tab Layout</string>
     <string name="navigation_record">Record</string>

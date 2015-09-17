@@ -26,9 +26,9 @@ public class RecordFragment extends TitleFragment implements UpdateViewInterface
     ImageView recordButton;
 
     @Override
-    public String getTitle()
+    public int getTitle()
     {
-        return "Record Voice";
+        return R.string.navigation_record;
     }
 
     @Override

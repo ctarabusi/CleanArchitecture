@@ -33,9 +33,9 @@ public class CommentsFragment extends TitleFragment implements View.OnClickListe
     RecyclerView mainListView;
 
     @Override
-    public String getTitle()
+    public int getTitle()
     {
-        return "Comments";
+        return R.string.navigation_comments;
     }
 
     @Override

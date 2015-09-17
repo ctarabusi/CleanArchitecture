@@ -30,9 +30,9 @@ public class TabLayoutFragment extends TitleFragment
     ViewPager viewPager;
 
     @Override
-    public String getTitle()
+    public int getTitle()
     {
-        return "Second Use Case";
+        return R.string.navigation_tablayout;
     }
 
     @Override

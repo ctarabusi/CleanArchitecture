@@ -57,7 +57,7 @@ public class Router
         ft.replace(R.id.content_frame, fragment);
         ft.commit();
 
-        activity.setTitle(fragment.getTitle());
+        activity.setTitle(activity.getResources().getString(fragment.getTitle()));
         activity.closeDrawer();
     }
 }
