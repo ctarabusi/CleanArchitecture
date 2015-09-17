@@ -12,7 +12,7 @@
         android:id="@+id/action_find_location"
         android:icon="@android:drawable/ic_dialog_map"
         android:orderInCategory="101"
-        android:title="Find"
-        app:showAsAction="always"/>
+        android:title="@string/action_map"
+        app:showAsAction="ifRoom"/>
 
 </menu>

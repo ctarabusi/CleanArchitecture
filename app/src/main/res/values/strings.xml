@@ -1,7 +1,12 @@
 <resources>
-    <string name="app_name">Example VIPER Architecture</string>
+    <string name="app_name">Clean Architecture</string>
 
-    <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
-    <string name="create_entry">Create a new DB Entry</string>
+    <string name="action_map">Map</string>
+
+    <string name="secondusecase_title">Dummy Title</string>
+
+    <string name="navigation_comments">Comments</string>
+    <string name="navigation_secondusecase">Second Use Case</string>
+
 </resources>

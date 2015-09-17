@@ -6,6 +6,6 @@
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:src="@drawable/materialdesign_principles_motion" />
+        android:src="@drawable/materialdesign_principles_motion"/>
 
 </RelativeLayout>
