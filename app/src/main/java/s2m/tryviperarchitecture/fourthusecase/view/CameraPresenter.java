@@ -55,7 +55,7 @@ public class CameraPresenter implements ViewEventListener
     }
 
     @Override
-    public void viewVisible(Activity activity)
+    public void viewVisible(@NonNull Activity activity)
     {
         if (!checkCameraHardware(activity))
         {
