@@ -14,8 +14,8 @@ import java.util.List;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import s2m.tryviperarchitecture.FragmentWithTitle;
 import s2m.tryviperarchitecture.R;
-import s2m.tryviperarchitecture.TitleFragment;
 import s2m.tryviperarchitecture.firstusecase.di.CommentsPresenterComponent;
 import s2m.tryviperarchitecture.firstusecase.di.DaggerCommentsPresenterComponent;
 import s2m.tryviperarchitecture.firstusecase.interactor.Comment;
@@ -23,7 +23,7 @@ import s2m.tryviperarchitecture.firstusecase.interactor.Comment;
 /**
  * Created by cta on 17/09/15.
  */
-public class CommentsFragment extends TitleFragment implements View.OnClickListener, UpdateViewInterface
+public class CommentsFragment extends FragmentWithTitle implements View.OnClickListener, UpdateViewInterface
 {
     private CommentsAdapter adapter;
 

@@ -21,5 +21,11 @@
             android:icon="@drawable/ic_mic_black_48dp"
             android:title="@string/navigation_record"/>
 
+        <item
+            android:id="@+id/navDrawerCamera"
+            android:checked="false"
+            android:icon="@drawable/ic_camera_roll_black_48dp"
+            android:title="@string/navigation_camera"/>
+
     </group>
 </menu>

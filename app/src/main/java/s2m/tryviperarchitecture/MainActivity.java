@@ -102,6 +102,10 @@ public class MainActivity extends ActionBarActivity
         {
             navigateTo(Router.NavigationPaths.RECORD);
         }
+        else if (menuId == R.id.navDrawerCamera)
+        {
+            navigateTo(Router.NavigationPaths.CAMERA);
+        }
     }
 
     public void closeDrawer()

@@ -13,15 +13,17 @@ import android.widget.ImageView;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import s2m.tryviperarchitecture.FragmentWithTitle;
 import s2m.tryviperarchitecture.R;
-import s2m.tryviperarchitecture.TitleFragment;
+import s2m.tryviperarchitecture.ViperApplication;
 import s2m.tryviperarchitecture.thirdusecase.di.DaggerRecordPresenterComponent;
 import s2m.tryviperarchitecture.thirdusecase.di.RecordPresenterComponent;
+import s2m.tryviperarchitecture.thirdusecase.di.RecordPresenterModule;
 
 /**
  * Created by cta on 17/09/15.
  */
-public class RecordFragment extends TitleFragment implements UpdateViewInterface
+public class RecordFragment extends FragmentWithTitle implements UpdateViewInterface
 {
     private ViewEventListener eventListener;
 
@@ -46,7 +48,7 @@ public class RecordFragment extends TitleFragment implements UpdateViewInterface
         View rootView = inflater.inflate(R.layout.fragment_record, container, false);
         ButterKnife.bind(this, rootView);
 
-        RecordPresenterComponent component = DaggerRecordPresenterComponent.create();
+        RecordPresenterComponent component = DaggerRecordPresenterComponent.builder().recordPresenterModule(new RecordPresenterModule(ViperApplication.getContext())).build();
         eventListener = component.provideRecordPresenter();
         eventListener.setOutput(this);
 

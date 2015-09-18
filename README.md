@@ -8,7 +8,7 @@ This project represent a proof of concept inspired by the VIPER architecture (Se
 
 Here is a list of libraries/frameworks I integrated:
 
-- Butterknife: to inject views in UI code and avoid findViewById and click listeners boilerplace
+- Butterknife: to inject views in UI code and avoid findViewById and click listeners boilerplate
 - Leak Canary: a very nice memory leak detection library to be sure to not leak activities etc
 - Dagger 2: for Dependency Injection. It is a quite complex framework and still is not used at its full potential (Still work in progress)
 - RxJava and RxAndroid: used on the interactor layer at the moment to schedule in a nice compact way the data store or network calls on the background thread and having the observer publishing results on the UI thread.
@@ -34,4 +34,5 @@ Still TODOs:
 - Integrating Espresso for UI Testing
 - General clean up and adding Null NotNull annotations
 - Adding presenters and interactors tests
+- Need to put the MediaRecorder on background thread?
 - Using Camera API

@@ -5,6 +5,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 
 import s2m.tryviperarchitecture.firstusecase.view.CommentsFragment;
+import s2m.tryviperarchitecture.fourthusecase.view.CameraFragment;
 import s2m.tryviperarchitecture.secondusecase.view.TabLayoutFragment;
 import s2m.tryviperarchitecture.thirdusecase.view.RecordFragment;
 
@@ -15,7 +16,7 @@ public class Router
 {
     public enum NavigationPaths
     {
-        COMMENTS, TAB_LAYOUT, RECORD
+        COMMENTS, TAB_LAYOUT, RECORD, CAMERA
     }
 
     private static Router instance = null;
@@ -31,7 +32,7 @@ public class Router
 
     public void navigateFromDrawer(@NonNull MainActivity activity, NavigationPaths navigation)
     {
-        TitleFragment fragment;
+        FragmentWithTitle fragment;
         switch (navigation)
         {
             case COMMENTS:
@@ -42,15 +43,19 @@ public class Router
                 fragment = new TabLayoutFragment();
                 break;
 
-            default:
+            case RECORD:
                 fragment = new RecordFragment();
+                break;
+
+            default:
+                fragment = new CameraFragment();
                 break;
 
         }
         replaceFragment(activity, fragment);
     }
 
-    private void replaceFragment(@NonNull MainActivity activity, @NonNull TitleFragment fragment)
+    private void replaceFragment(@NonNull MainActivity activity, @NonNull FragmentWithTitle fragment)
     {
         FragmentManager fragmentManager = activity.getSupportFragmentManager();
         FragmentTransaction ft = fragmentManager.beginTransaction();

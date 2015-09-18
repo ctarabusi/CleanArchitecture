@@ -14,12 +14,12 @@ import android.view.ViewGroup;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import s2m.tryviperarchitecture.R;
-import s2m.tryviperarchitecture.TitleFragment;
+import s2m.tryviperarchitecture.FragmentWithTitle;
 
 /**
  * Created by cta on 17/09/15.
  */
-public class TabLayoutFragment extends TitleFragment
+public class TabLayoutFragment extends FragmentWithTitle
 {
     private static final int NUM_PAGES = 3;
 

@@ -7,6 +7,7 @@
     <string name="navigation_comments">Comments</string>
     <string name="navigation_tablayout">Tab Layout</string>
     <string name="navigation_record">Record</string>
+    <string name="navigation_camera">Camera</string>
 
     <string name="record_start">Started Recording...</string>
     <string name="record_stop">Stopped Recording</string>
