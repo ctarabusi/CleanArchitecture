@@ -1,23 +1,15 @@
 package s2m.tryviperarchitecture.fourthusecase.view;
 
-import android.app.Activity;
-import android.hardware.Camera;
 import android.os.Bundle;
-import android.os.Environment;
 import android.support.annotation.StringRes;
+import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
-import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.Surface;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
-
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
+import android.widget.TextView;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -37,10 +29,13 @@ public class CameraFragment extends FragmentWithTitle implements UpdateViewInter
     private ViewEventListener eventListener;
 
     @Bind(R.id.take_snapshot)
-    ImageView takeSnapshotButton;
+    FloatingActionButton takeSnapshotButton;
 
     @Bind(R.id.camera_preview)
     FrameLayout previewLayout;
+
+    @Bind(R.id.no_camera_textView)
+    TextView noCameraTextView;
 
     @Override
     public int getTitle()
@@ -86,7 +81,14 @@ public class CameraFragment extends FragmentWithTitle implements UpdateViewInter
     public void showCameraSnackbar(@StringRes int snackBarContentId)
     {
         String snackBarContent = getResources().getString(snackBarContentId);
-        Snackbar.make(takeSnapshotButton, snackBarContent, Snackbar.LENGTH_SHORT).show();
+        Snackbar.make(previewLayout, snackBarContent, Snackbar.LENGTH_SHORT).show();
+    }
+
+    public void showNoCameraMessage()
+    {
+        previewLayout.setVisibility(View.GONE);
+        takeSnapshotButton.setVisibility(View.GONE);
+        noCameraTextView.setVisibility(View.VISIBLE);
     }
 
 }

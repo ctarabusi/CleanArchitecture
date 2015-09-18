@@ -33,7 +33,6 @@ public class MainActivity extends ActionBarActivity
 
         setSupportActionBar(toolbar);
 
-        //Setting Navigation View Item Selected Listener to handle the item click of the navigation menu
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener()
         {
 

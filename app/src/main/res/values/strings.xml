@@ -13,4 +13,7 @@
     <string name="record_stop">Stopped Recording</string>
     <string name="record_error">Ups something gone wrong!</string>
 
+    <string name="snapshot_saved">Photo saved on disk</string>
+    <string name="no_camera_available">No Camera is available</string>
+
 </resources>

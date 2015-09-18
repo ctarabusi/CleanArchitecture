@@ -8,4 +8,6 @@ import android.support.annotation.StringRes;
 public interface UpdateViewInterface
 {
      void showCameraSnackbar(@StringRes int snackbarTextId);
+
+     void showNoCameraMessage();
 }

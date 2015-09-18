@@ -14,6 +14,8 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
+import s2m.tryviperarchitecture.R;
+
 /**
  * Created by cta on 18/09/15.
  */
@@ -37,7 +39,6 @@ public class CameraPresenter implements ViewEventListener
             @Override
             public void onPictureTaken(byte[] data, Camera camera)
             {
-
                 String fileName = "Photo" + System.currentTimeMillis() + ".jpg";
                 File pictureFile = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES), fileName);
 
@@ -47,8 +48,9 @@ public class CameraPresenter implements ViewEventListener
                     fos.write(data);
                     fos.close();
 
-                    // We saved the file, start new preview
+                    // We saved the file, start new preview and show snackbar
                     camera.startPreview();
+                    output.showCameraSnackbar(R.string.snapshot_saved);
 
                 } catch (FileNotFoundException e)
                 {
@@ -63,22 +65,11 @@ public class CameraPresenter implements ViewEventListener
         mCamera.takePicture(null, null, mPicture);
     }
 
-    /**
-     * Check if this device has a camera
-     */
     private boolean checkCameraHardware(Context context)
     {
-        if (context.getPackageManager().hasSystemFeature(PackageManager.FEATURE_CAMERA))
-        {
-            // this device has a camera
-            return true;
-        } else
-        {
-            // no camera on this device
-            return false;
-        }
+        return context.getPackageManager().hasSystemFeature(PackageManager.FEATURE_CAMERA);
     }
-    
+
     @Override
     public void setOutput(@NonNull UpdateViewInterface output)
     {
@@ -94,6 +85,11 @@ public class CameraPresenter implements ViewEventListener
     @Override
     public void viewVisible(Activity activity)
     {
+        if (!checkCameraHardware(activity))
+        {
+            output.showNoCameraMessage();
+            return;
+        }
         // Create an instance of Camera
         mCamera = getCameraInstance();
 
@@ -106,9 +102,12 @@ public class CameraPresenter implements ViewEventListener
     @Override
     public void viewGone()
     {
-        mCamera.release();
-        mCamera = null;
-        cameraPreview = null;
+        if (mCamera != null)
+        {
+            mCamera.release();
+            mCamera = null;
+            cameraPreview = null;
+        }
     }
 
     /**
@@ -120,8 +119,7 @@ public class CameraPresenter implements ViewEventListener
         try
         {
             camera = Camera.open(0);
-        }
-        catch (Exception e)
+        } catch (Exception e)
         {
             Log.e(TAG, "failed to open Camera");
         }
