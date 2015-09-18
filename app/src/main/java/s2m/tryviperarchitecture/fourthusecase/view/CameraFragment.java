@@ -42,9 +42,6 @@ public class CameraFragment extends FragmentWithTitle implements UpdateViewInter
     @Bind(R.id.camera_preview)
     FrameLayout previewLayout;
 
-    private Camera mCamera;
-    private Camera.PictureCallback mPicture;
-
     @Override
     public int getTitle()
     {
@@ -57,48 +54,32 @@ public class CameraFragment extends FragmentWithTitle implements UpdateViewInter
         View rootView = inflater.inflate(R.layout.fragment_camera, container, false);
         ButterKnife.bind(this, rootView);
 
-        // Create an instance of Camera
-        mCamera = getCameraInstance();
-
-        // Create our Preview view and set it as the content of our activity.
-        CameraPreview mPreview = new CameraPreview(this.getActivity(), mCamera);
-
-        previewLayout.addView(mPreview);
-
         CameraPresenterComponent component = DaggerCameraPresenterComponent.create();
         eventListener = component.provideCameraPresenter();
         eventListener.setOutput(this);
-
-        mPicture = new Camera.PictureCallback()
-        {
-
-            @Override
-            public void onPictureTaken(byte[] data, Camera camera)
-            {
-                File pictureFile = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), "Photo.jpg");
-
-                try
-                {
-                    FileOutputStream fos = new FileOutputStream(pictureFile);
-                    fos.write(data);
-                    fos.close();
-                } catch (FileNotFoundException e)
-                {
-                    Log.d(TAG, "File not found: " + e.getMessage());
-                } catch (IOException e)
-                {
-                    Log.d(TAG, "Error accessing file: " + e.getMessage());
-                }
-            }
-        };
+        eventListener.setPreviewLayout(previewLayout);
 
         return rootView;
+    }
+
+    @Override
+    public void onResume()
+    {
+        eventListener.viewVisible(this.getActivity());
+        super.onResume();
+    }
+
+    @Override
+    public void onPause()
+    {
+        eventListener.viewGone();
+        super.onPause();
     }
 
     @OnClick(R.id.take_snapshot)
     public void takeSnapshotClicked()
     {
-        mCamera.takePicture(null, null, mPicture);
+        eventListener.takeSnapshotClicked();
     }
 
     @Override
@@ -108,20 +89,4 @@ public class CameraFragment extends FragmentWithTitle implements UpdateViewInter
         Snackbar.make(takeSnapshotButton, snackBarContent, Snackbar.LENGTH_SHORT).show();
     }
 
-
-    /**
-     * A safe way to get an instance of the Camera object.
-     */
-    public static Camera getCameraInstance()
-    {
-        Camera c = null;
-        try
-        {
-            c = Camera.open(0); // attempt to get a Camera instance
-        } catch (Exception e)
-        {
-            Log.e("To Replace", "failed to open Camera");
-        }
-        return c; // returns null if camera is unavailable
-    }
 }
