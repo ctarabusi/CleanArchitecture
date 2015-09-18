@@ -1,5 +1,7 @@
 package s2m.tryviperarchitecture.fourthusecase.view;
 
+import android.content.Context;
+import android.content.pm.PackageManager;
 import android.hardware.Camera;
 import android.support.annotation.NonNull;
 import android.util.Log;
@@ -13,34 +15,21 @@ public class CameraPresenter implements ViewEventListener
 
     private UpdateViewInterface output;
 
-    private Camera camera;
-
     @Override
     public void takeSnapshotClicked()
     {
 
-        boolean qOpened = false;
-
-        try
-        {
-            releaseCameraAndPreview();
-            camera = Camera.open(3);
-            qOpened = (camera != null);
-        } catch (Exception e)
-        {
-            Log.e(TAG, "failed to open Camera");
-            e.printStackTrace();
-        }
 
     }
 
-    private void releaseCameraAndPreview()
-    {
-       // mPreview.setCamera(null);
-        if (camera != null)
-        {
-            camera.release();
-            camera = null;
+    /** Check if this device has a camera */
+    private boolean checkCameraHardware(Context context) {
+        if (context.getPackageManager().hasSystemFeature(PackageManager.FEATURE_CAMERA)){
+            // this device has a camera
+            return true;
+        } else {
+            // no camera on this device
+            return false;
         }
     }
 
