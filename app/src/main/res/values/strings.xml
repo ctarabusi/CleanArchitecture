@@ -8,4 +8,8 @@
     <string name="navigation_tablayout">Tab Layout</string>
     <string name="navigation_record">Record</string>
 
+    <string name="record_start">Started Recording...</string>
+    <string name="record_stop">Stopped Recording</string>
+    <string name="record_error">Ups something gone wrong!</string>
+
 </resources>

@@ -5,10 +5,30 @@
               android:gravity="center"
               android:orientation="vertical">
 
-    <ImageView
-        android:id="@+id/start_record_button"
+    <Chronometer
+        android:id="@+id/chronometer"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:format="%s"
+        android:textSize="40sp"/>
 
-        android:src="@drawable/ic_headset_mic_black_48dp"/>
+    <FrameLayout
+        android:layout_width="wrap_content"
+        android:layout_height="100dp"
+        android:padding="20dp">
+
+        <ImageView
+            android:id="@+id/start_record_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_mic_black_48dp"/>
+
+        <ImageView
+            android:id="@+id/stop_record_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_stop_black_48dp"
+            android:visibility="gone"/>
+
+    </FrameLayout>
 </LinearLayout>

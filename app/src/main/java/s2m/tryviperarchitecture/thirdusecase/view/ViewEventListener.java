@@ -7,7 +7,13 @@ import android.support.annotation.NonNull;
  */
 public interface ViewEventListener
 {
+    void viewVisible();
+
+    void viewGone();
+
     void setOutput(@NonNull final UpdateViewInterface output);
 
     void startRecordingButtonClicked();
+
+    void stopRecordingButtonClicked();
 }

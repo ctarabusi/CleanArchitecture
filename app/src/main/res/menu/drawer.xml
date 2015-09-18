@@ -18,7 +18,7 @@
         <item
             android:id="@+id/navDrawerRecord"
             android:checked="false"
-            android:icon="@drawable/ic_headset_mic_black_48dp"
+            android:icon="@drawable/ic_mic_black_48dp"
             android:title="@string/navigation_record"/>
 
     </group>

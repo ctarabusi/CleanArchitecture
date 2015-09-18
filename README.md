@@ -1,8 +1,10 @@
 # CleanArchitecture
 
-This project tries to loosely follow the VIPER architecture (See https://www.objc.io/issues/13-architecture/viper/) but trying to find a balance between flexibility and overhead.
+This project represent a proof of concept inspired by the VIPER architecture (See https://www.objc.io/issues/13-architecture/viper/).
 
-It is primarly intended as a blue print for future projects defining a set of useful libraries, frameworks and best practises in the context of loosely coupled architecture composed of different layers.
+- The main objective is to evaluate the architecture (using it into "Real world" use cases) finding a balance between flexibility, modularity, loose coupling and overhead.
+- Secondly it is intended as a blue print for future projects defining a set of useful libraries, frameworks and best practices.
+- Thirdly it is a good way to use some APIs to improve my experience on it (MediaRecorder, Camera API)
 
 Here is a list of libraries/frameworks I integrated:
 
@@ -31,3 +33,5 @@ Still TODOs:
 - Improve Dagger usage (maybe injecting the activity context)
 - Integrating Espresso for UI Testing
 - General clean up and adding Null NotNull annotations
+- Adding presenters and interactors tests
+- Using Camera API

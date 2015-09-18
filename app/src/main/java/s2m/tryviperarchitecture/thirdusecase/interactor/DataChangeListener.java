@@ -5,5 +5,5 @@ package s2m.tryviperarchitecture.thirdusecase.interactor;
  */
 public interface DataChangeListener
 {
-    void issueArised(String exceptionMessage);
+    void exceptionFromInteractor();
 }

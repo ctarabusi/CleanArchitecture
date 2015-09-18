@@ -4,6 +4,7 @@ import android.support.annotation.NonNull;
 
 import javax.inject.Inject;
 
+import s2m.tryviperarchitecture.R;
 import s2m.tryviperarchitecture.thirdusecase.interactor.DataChangeListener;
 import s2m.tryviperarchitecture.thirdusecase.interactor.RecordInteractor;
 
@@ -27,6 +28,18 @@ public class RecordPresenter implements ViewEventListener, DataChangeListener
     }
 
     @Override
+    public void viewVisible()
+    {
+        interactor.initRecorder();
+    }
+
+    @Override
+    public void viewGone()
+    {
+        interactor.releaseRecorder();
+    }
+
+    @Override
     public void setOutput(@NonNull UpdateViewInterface output)
     {
         this.output = output;
@@ -40,19 +53,28 @@ public class RecordPresenter implements ViewEventListener, DataChangeListener
             interactor.startRecording();
 
             isRecording = true;
-            output.showRecordingSnackbar("Started Recording...");
-        } else
-        {
-            interactor.stopRecording();
 
-            isRecording = false;
-            output.showRecordingSnackbar("Stopped Recording");
+            output.startChronometer();
+            output.showRecordingSnackbar(R.string.record_start);
         }
     }
 
     @Override
-    public void issueArised(String exceptionMessage)
+    public void stopRecordingButtonClicked()
     {
-        output.showRecordingSnackbar("Ups something gone wrong!");
+        if (isRecording)
+        {
+            interactor.stopRecording();
+
+            isRecording = false;
+            output.stopChronometer();
+            output.showRecordingSnackbar(R.string.record_stop);
+        }
+    }
+
+    @Override
+    public void exceptionFromInteractor()
+    {
+        output.showRecordingSnackbar(R.string.record_error);
     }
 }
