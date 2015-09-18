@@ -4,6 +4,7 @@ import javax.inject.Singleton;
 
 import dagger.Module;
 import dagger.Provides;
+import s2m.tryviperarchitecture.fourthusecase.interactor.CameraInteractor;
 import s2m.tryviperarchitecture.fourthusecase.view.CameraPresenter;
 
 /**
@@ -12,11 +13,17 @@ import s2m.tryviperarchitecture.fourthusecase.view.CameraPresenter;
 @Module
 public class CameraPresenterModule
 {
+    @Provides
+    @Singleton
+    CameraInteractor provideCameraInteractor()
+    {
+        return new CameraInteractor();
+    }
 
     @Provides
     @Singleton
-    CameraPresenter provideCommentsPresenter()
+    CameraPresenter provideCommentsPresenter(CameraInteractor interactor)
     {
-        return new CameraPresenter();
+        return new CameraPresenter(interactor);
     }
 }

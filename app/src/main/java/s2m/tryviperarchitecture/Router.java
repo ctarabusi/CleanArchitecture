@@ -1,6 +1,7 @@
 package s2m.tryviperarchitecture;
 
 import android.support.annotation.NonNull;
+import android.support.annotation.UiThread;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 
@@ -21,8 +22,10 @@ public class Router
 
     private static Router instance = null;
 
+    @UiThread
     public static Router getInstance()
     {
+        // We should always call this from the UI Thread so no need of synchronization
         if (instance == null)
         {
             instance = new Router();
